@@ -1,0 +1,523 @@
+enum ModelName {
+  Merchant
+  Product
+  Branch
+}
+
+enum ApproveStatus {
+  approved
+  pending
+  rejected
+}
+
+enum ProductApproveStatus {
+  approved
+  rejected
+}
+
+enum MERCHANT_REQUEST_TYPES {
+  bank_account
+  data
+}
+
+enum BRANCH_REQUEST_TYPES {
+  publish
+  reservation
+  data
+}
+
+union AllReviewsUnion = FindOneMerchantRequestRes | FindOneProductRequestRes | DashboardOrderRes # notification find all
+union AllReviewsRequestsUnion = ReviewMerchantRes | ReviewProductRes | ReviewBranchRes # requests find all
+type Review {
+  modelName: ModelName
+  reference: String
+  updatedBy: String
+  approveStatus: ApproveStatus
+  _id: String
+}
+
+type ReviewMerchantRes {
+  modelName: ModelName
+  reference: Merchant
+  updatedBy: String
+  approveStatus: ApproveStatus
+  _id: String
+  merchantRequestType: MERCHANT_REQUEST_TYPES
+}
+
+type ReviewProductRes {
+  modelName: ModelName
+  reference: Product
+  updatedBy: String
+  approveStatus: ApproveStatus
+  _id: String
+}
+
+type ReviewBranchRes {
+  modelName: ModelName
+  reference: Branch
+  updatedBy: String
+  approveStatus: ApproveStatus
+  _id: String
+}
+
+type MerchantReview {
+  modelName: ModelName
+  reference: Merchant
+  updatedBy: String
+  approveStatus: ApproveStatus
+  _id: String
+  name: String
+  description: String
+  commercialRegistrationNumber: String
+  commercialName: String
+  branchesNumber: Int
+  hasDeliveryService: Boolean
+  address: String
+  uuid: String
+  # build_status: MERCHANT_BUILD_STATUS
+  # release_status: MERCHANT_RELEASE_STATUS
+  status: MERCHANT_STATUS
+  status_tags: MERCHANT_STATUS_TAGS
+  visibility_status: MERCHANT_VISIBILITY_STATUS
+  ownerId: String
+  logo: String
+  identificationImage: String
+  commercialIdImage: String
+  balance: Float
+  location: Location
+  locationDelta: [Int]
+  notes: [String]
+  isDeleted: Boolean
+  translation: [TranslationMerchant]
+  categoriesIds: [String]
+  tagsIds: [String]
+  cityId: String
+  productsPriceRange: Float
+  twitterUrl: SocialMedia
+  facebookUrl: SocialMedia
+  websiteUrl: SocialMedia
+  snapUrl: SocialMedia
+  tiktokUrl: SocialMedia
+  mobile: String
+  approvedBy: String
+  inReview: Boolean
+  createdAt: String
+  updatedAt: String
+  bankAccount: BankAccountRes
+  merchantRequestType: MERCHANT_REQUEST_TYPES
+}
+
+type FindOneMerchantRequestRes {
+  modelName: ModelName
+  reference: String
+  updatedBy: String
+  approveStatus: ApproveStatus
+  _id: String
+  name: String
+  description: String
+  commercialRegistrationNumber: String
+  commercialName: String
+  branchesNumber: Int
+  hasDeliveryService: Boolean
+  address: String
+  uuid: String
+  # build_status: MERCHANT_BUILD_STATUS
+  # release_status: MERCHANT_RELEASE_STATUS
+  status: MERCHANT_STATUS
+  status_tags: MERCHANT_STATUS_TAGS
+  visibility_status: MERCHANT_VISIBILITY_STATUS
+  ownerId: String
+  logo: String
+  identificationImage: String
+  commercialIdImage: String
+  balance: Float
+  location: Location
+  locationDelta: [Int]
+  notes: [String]
+  isDeleted: Boolean
+  translation: [TranslationMerchant]
+  categoriesIds: [String]
+  tagsIds: [String]
+  cityId: String
+  productsPriceRange: Float
+  twitterUrl: SocialMedia
+  facebookUrl: SocialMedia
+  websiteUrl: SocialMedia
+  snapUrl: SocialMedia
+  tiktokUrl: SocialMedia
+  mobile: String
+  approvedBy: String
+  inReview: Boolean
+  createdAt: String
+  updatedAt: String
+  bankAccount: BankAccountRes
+  merchantRequestType: MERCHANT_REQUEST_TYPES
+  commissions: [MerchantCommissionsRes]
+}
+
+type ProductReview {
+  modelName: ModelName
+  reference: Product
+  _id: String
+  updatedBy: String
+  approveStatus: ApproveStatus
+  inReview: Boolean
+  approvedBy: String
+  name: String
+  description: String
+  preparationTime: Int
+  productGroupsIds: [String]
+  categoriesIds: [String]
+  merchantId: String
+  branchesIds: [String]
+  images: [ProductImage]
+  mainImage: ProductImage
+  price: Int
+  numberOfSale: Int
+  translation: [ProductTranslation]
+  isDeleted: Boolean
+  build_status: PRODUCT_BUILD_STATUS
+  release_status: PRODUCT_RELEASE_STATUS
+  status: STATUS
+  calories: Int
+  serialDisplayNumber: Int
+  discount: Discount
+  notes: [String]
+  mealsTime: [MealsTime]
+  totalSalePrice: Float
+  createdAt: String
+  updatedAt: String
+  quantity: Int
+}
+
+type FindOneProductRequestRes {
+  modelName: ModelName
+  reference: String
+  updatedBy: String
+  approveStatus: ApproveStatus
+  _id: String
+  name: String
+  description: String
+  preparationTime: Int
+  productGroupsIds: [ProductGroup]
+  categoriesIds: [ProductCategory]
+  merchantId: String
+  branchesIds: [Branch]
+  images: [ProductImage]
+  mainImage: ProductImage
+  price: Int
+  numberOfSale: Int
+  translation: [ProductTranslation]
+  isDeleted: Boolean
+  build_status: PRODUCT_BUILD_STATUS
+  release_status: PRODUCT_RELEASE_STATUS
+  status: STATUS
+  calories: Int
+  serialDisplayNumber: Int
+  inReview: Boolean
+  discount: Discount
+  approvedBy: String
+  notes: [String]
+  mealsTime: [MealsTime]
+  totalSalePrice: Float
+  createdAt: String
+  updatedAt: String
+}
+
+enum MERCHANT_BUILD_STATUS_INPUT {
+  pending
+  approved
+  rejected
+  banned
+}
+
+input MerchantApproveOrRejectDto {
+  status: MERCHANT_BUILD_STATUS_INPUT
+  status_tags: MERCHANT_STATUS_TAGS
+  notes: [String]
+  commissions: [MerchantCommissionsInput]
+}
+
+input UpdateMerchantDto {
+  nameArabic: String
+  descriptionArabic: String
+  nameEnglish: String
+  descriptionEnglish: String
+  commercialRegistrationNumber: String
+  commercialName: String
+  hasDeliveryService: Boolean
+  uuid: String
+  logo: String
+  identificationImage: String
+  commercialIdImage: String
+  balance: Float
+  longitude: Float
+  latitude: Float
+  longitudeDelta: Float
+  latitudeDelta: Float
+  ownerId: String
+  categoriesIds: [String]
+  tagsIds: [String]
+  cityId: String
+  gender: Gender
+  twitterUrl: SocialMediaInput
+  facebookUrl: SocialMediaInput
+  websiteUrl: SocialMediaInput
+  snapUrl: SocialMediaInput
+  tiktokUrl: SocialMediaInput
+  mobile: String
+  # build_status: MERCHANT_BUILD_STATUS
+  # release_status: MERCHANT_RELEASE_STATUS
+  visibility_status: MERCHANT_VISIBILITY_STATUS
+  bankAccount: BankAccountInput
+}
+
+type ApproveOrRejectMerchantRequestRes {
+  success: Boolean
+  updatedMerchant: Merchant
+  requestRemoved: Boolean
+}
+
+type CancelMerchantRequestRes {
+  success: Boolean
+}
+
+input UpdateProductDto {
+  nameArabic: String
+  nameEnglish: String
+  descriptionArabic: String
+  descriptionEnglish: String
+  preparationTime: Int
+  productGroupsIds: [String]
+  categoriesIds: [String]
+  branchesIds: [String]
+  images: [ProductImageDto]
+  mainImage: ProductImageDto
+  price: Int
+  status: STATUS
+  calories: Int
+  mealsTime: [PRODUCT_MEALS_TIME]
+  serialDisplayNumber: Int
+}
+
+input ProductApproveOrReject {
+  build_status: ProductApproveStatus
+  approveStatus: ProductApproveStatus
+  notes: [String]
+}
+
+type ApproveOrRejectProductRequestRes {
+  success: Boolean
+  updatedProduct: ProductRes
+  requestRemoved: Boolean
+}
+
+type CancelProductRequestRes {
+  success: Boolean
+}
+
+type FindOneBranchRequestRes {
+  modelName: ModelName
+  reference: String
+  updatedBy: String
+  approveStatus: ApproveStatus
+  _id: String
+  name: String
+  search: [String]
+  mobile: String
+  address: String
+  cityId: String
+  merchantId: String
+  ownerId: String
+  uuid: String
+  visibleToClients: String
+  # build_status: BRANCH_BUILD_STATUS
+  # release_status: BRANCH_RELEASE_STATUS
+  status: BRANCH_STATUS
+  status_tags: BRANCH_STATUS_TAGS
+  visibility_status: BRANCH_VISIBILITY_STATUS
+  notes: [String]
+  isFreezing: String
+  location: Location
+  locationDelta: [Float]
+  workingHours: [WorkingHours]
+  reservationsDays: [ReservationsDays]
+  reservationsSettings: ReservationsSettings
+  reservationsInstructions: String
+  pickupInstructions: String
+  deliveryInstructions: String
+  translation: [BranchTranslation]
+  isDeleted: Boolean
+  client_visits: Int
+  inReview: Boolean
+  reservation_status: BRANCH_RESERVATION_STATUS
+  createdAt: String
+  updatedAt: String
+  products: String
+}
+
+type ApproveOrRejectBranchRequestRes {
+  success: Boolean
+  updatedBranch: Branch
+  requestRemoved: Boolean
+}
+
+type CancelBranchRequestRes {
+  success: Boolean
+}
+
+input UpdateBranchRequestDto {
+  nameArabic: String
+  nameEnglish: String
+  mobile: String
+  cityId: String
+  address: String
+  longitude: Float
+  latitude: Float
+  longitudeDelta: Int
+  latitudeDelta: Int
+  notes: [String]
+  workingHours: [WorkingHoursInput]
+  reservationsInstructions: String
+  pickupInstructions: String
+  deliveryInstructions: String
+  products: String
+  reservationsDays: [ReservationsDaysInput]
+  reservationsSettings: ReservationsSettingsInput
+}
+
+input BranchApproveOrRejectDto {
+  status: BRANCH_STATUS
+  status_tags: BRANCH_STATUS_TAGS
+  notes: [String]
+}
+
+type BranchReview {
+  modelName: ModelName
+  reference: Branch
+  updatedBy: String
+  approveStatus: ApproveStatus
+  _id: String
+  name: String
+  search: [String]
+  mobile: String
+  address: String
+  cityId: String
+  merchantId: String
+  ownerId: String
+  uuid: String
+  visibleToClients: String
+  status: BRANCH_STATUS
+  status_tags: BRANCH_STATUS_TAGS
+  visibility_status: BRANCH_VISIBILITY_STATUS
+  notes: [String]
+  isFreezing: String
+  location: Location
+  locationDelta: [Float]
+  workingHours: [WorkingHours]
+  reservationsDays: [ReservationsDays]
+  reservationsSettings: ReservationsSettings
+  reservationsInstructions: String
+  pickupInstructions: String
+  deliveryInstructions: String
+  translation: [BranchTranslation]
+  isDeleted: Boolean
+  client_visits: Int
+  inReview: Boolean
+  reservation_status: BRANCH_RESERVATION_STATUS
+  createdAt: String
+  updatedAt: String
+  branchRequestType: BRANCH_REQUEST_TYPES
+}
+
+input ReviewQueryInput {
+  page: Int
+  limit: Int
+  sortBy: String
+  paginate: Boolean
+  order: Int
+  models: [String]
+  cities: [String]
+  categories: [String]
+  fromCreatedAt: String
+  toCreatedAt: String
+  merchantRequestType: MERCHANT_REQUEST_TYPES
+}
+
+type DashboardFindAllRequestsRes {
+  reviews: [AllReviewsRequestsUnion]
+  page: Int
+  pages: Int
+  length: Int
+}
+
+type CreatePublishBranchesRequestsRes {
+  success: Boolean
+}
+
+type Mutation {
+  # for merchant review
+  createMerchantRequest(
+    merchantId: String!
+    merchantRequestType: MERCHANT_REQUEST_TYPES!
+    updateMerchantDto: UpdateMerchantDto
+  ): MerchantReview
+  updateMerchantRequest(
+    merchantId: String!
+    requestId: String!
+    merchantRequestType: MERCHANT_REQUEST_TYPES!
+    updateMerchantDto: UpdateMerchantDto
+  ): MerchantReview
+  approveOrRejectMerchantRequest(
+    merchantId: String!
+    merchantRequestType: MERCHANT_REQUEST_TYPES!
+    changeStatusDto: MerchantApproveOrRejectDto
+  ): ApproveOrRejectMerchantRequestRes
+  cancelMerchantRequest(requestId: String!, merchantRequestType: MERCHANT_REQUEST_TYPES!): CancelMerchantRequestRes
+
+  # for product review
+  createProductRequest(productId: String!, merchantId: String!, updateProductDto: UpdateProductDto): ProductReview
+  updateProductRequest(productId: String!, requestId: String!, updateProductDto: UpdateProductDto): ProductReview
+  approveOrRejectProductRequest(
+    productId: String!
+    merchantId: String!
+    productApproveOrReject: ProductApproveOrReject
+  ): ApproveOrRejectProductRequestRes
+  cancelProductRequest(requestId: String!): CancelProductRequestRes
+
+  # for branch review
+  createBranchRequest(
+    branchId: String!
+    branchRequestType: BRANCH_REQUEST_TYPES
+    updateBranchDto: UpdateBranchRequestDto
+  ): BranchReview
+  createPublishBranchesRequests(branchesIds: [String!]): CreatePublishBranchesRequestsRes
+  updateBranchRequest(
+    branchId: String!
+    requestId: String!
+    branchRequestType: BRANCH_REQUEST_TYPES!
+    updateBranchDto: UpdateBranchDto
+  ): BranchReview
+  approveOrRejectBranchRequest(
+    branchId: String!
+    branchRequestType: BRANCH_REQUEST_TYPES
+    changeStatusDto: BranchApproveOrRejectDto
+  ): ApproveOrRejectBranchRequestRes
+  cancelBranchRequest(requestId: String!, branchRequestType: BRANCH_REQUEST_TYPES): CancelBranchRequestRes
+}
+
+type Query {
+  # for merchant review
+  findOneMerchantRequest(merchantId: String!, merchantRequestType: MERCHANT_REQUEST_TYPES!): FindOneMerchantRequestRes
+
+  # for product review
+  findOneProductRequest(productId: String!): FindOneProductRequestRes
+
+  # for branch review
+  findOneBranchRequest(branchId: String!, branchRequestType: BRANCH_REQUEST_TYPES): FindOneBranchRequestRes
+
+  # for dashboard review
+  dashboardFindAllRequests(query: ReviewQueryInput): DashboardFindAllRequestsRes
+  dashboardFindOneRequest(referenceId: String!): Review
+}

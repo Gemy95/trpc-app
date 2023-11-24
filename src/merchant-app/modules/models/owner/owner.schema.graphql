@@ -1,0 +1,411 @@
+type Owner_Permission {
+  value: String
+  # labelArabic: String
+  # labelEnglish: String
+}
+
+type OWNER_ROLE {
+  nameArabic: String
+  nameEnglish: String
+  permissions: [Owner_Permission]
+}
+
+enum OWNER_STATUS {
+  active
+  inActive
+  banned
+}
+
+enum EmailOrMobileEnum {
+  mobile
+  email
+}
+
+input CreateOwnerInput {
+  name: String!
+  countryCode: String!
+  mobile: String!
+  email: String!
+  password: String!
+  cityId: String!
+  countryId: String!
+  dateOfBirth: String
+  uuid: String
+}
+
+input VerifyMobileOwnerInput {
+  countryCode: String!
+  mobile: String!
+  otp: String!
+  uuid: String
+}
+
+input BodyConfirmOwnerInput {
+  otp: String!
+  uuid: String
+}
+
+input ParamsConfirmOwnerInput {
+  email: String!
+}
+
+input LoginOwnerInput {
+  countryCode: String!
+  mobile: String!
+  password: String!
+  uuid: String
+  isCancelDeleteAccount: Boolean
+}
+
+input RequestForgetPasswordOwnerInput {
+  email: String!
+}
+
+input VerifyForgetPasswordOwnerInput {
+  email: String!
+  otp: String!
+}
+
+input ChangePasswordOwnerInput {
+  email: String!
+  password: String!
+  otp: String!
+  uuid: String
+}
+
+input RequestChangeEmailOwnerInput {
+  email: String!
+}
+
+input RequestChangeMobileOwnerInput {
+  countryCode: String!
+  mobile: String!
+}
+
+input VerifyChangeEmailOwnerInput {
+  email: String!
+  otp: String!
+}
+
+input VerifyChangeMobileOwnerInput {
+  countryCode: String!
+  mobile: String!
+  otp: String!
+}
+
+input ResendOtpOwnerInput {
+  countryCode: String!
+  mobile: String!
+}
+
+input UpdateOwnerByItselfInput {
+  oldPassword: String
+  newPassword: String
+  gender: String
+  cityId: String
+  name: String
+  dateOfBirth: String
+  uuid: String
+}
+
+type VerifyMobileRes {
+  _id: String
+  name: String
+  countryCode: String
+  mobile: String
+  email: String
+  uuid: String
+  mobileIsVerified: Boolean
+  emailIsVerified: Boolean
+  type: String
+  isDeleted: Boolean
+  otp_verify_type: OTP_VERIFICATION_TYPE
+  role: OWNER_ROLE
+  status: OWNER_STATUS
+  dateOfBirth: String
+  gender: String
+  createdAt: String
+  updatedAt: String
+  country: Country
+  city: City
+  merchant: Merchant
+  branches: [Branch]
+  totalMerchantEmployeesCount: Int
+  totalOrdersCount: Int
+  token: String
+  refreshToken: String
+  success: Boolean
+  isPasswordReset: Boolean
+}
+
+type VerifyEmailRes {
+  _id: String
+  name: String
+  countryCode: String
+  mobile: String
+  email: String
+  uuid: String
+  mobileIsVerified: Boolean
+  emailIsVerified: Boolean
+  type: String
+  isDeleted: Boolean
+  otp_verify_type: OTP_VERIFICATION_TYPE
+  role: OWNER_ROLE
+  status: OWNER_STATUS
+  dateOfBirth: String
+  gender: String
+  createdAt: String
+  updatedAt: String
+  country: Country
+  city: City
+  merchant: Merchant
+  branches: [Branch]
+  totalMerchantEmployeesCount: Int
+  totalOrdersCount: Int
+  token: String
+  refreshToken: String
+  success: Boolean
+  isPasswordReset: Boolean
+}
+
+type LoginRes {
+  _id: String
+  name: String
+  countryCode: String
+  mobile: String
+  email: String
+  uuid: String
+  mobileIsVerified: Boolean
+  emailIsVerified: Boolean
+  type: String
+  isDeleted: Boolean
+  otp_verify_type: OTP_VERIFICATION_TYPE
+  role: OWNER_ROLE
+  status: OWNER_STATUS
+  dateOfBirth: String
+  gender: String
+  createdAt: String
+  updatedAt: String
+  country: Country
+  city: City
+  merchant: Merchant
+  branches: [Branch]
+  totalMerchantEmployeesCount: Int
+  totalOrdersCount: Int
+  token: String
+  refreshToken: String
+  success: Boolean
+  isPasswordReset: Boolean
+}
+
+type ChangePasswordRes {
+  _id: String
+  name: String
+  countryCode: String
+  mobile: String
+  email: String
+  uuid: String
+  mobileIsVerified: Boolean
+  emailIsVerified: Boolean
+  type: String
+  isDeleted: Boolean
+  otp_verify_type: OTP_VERIFICATION_TYPE
+  role: OWNER_ROLE
+  status: OWNER_STATUS
+  dateOfBirth: String
+  gender: String
+  createdAt: String
+  updatedAt: String
+  country: Country
+  city: City
+  merchant: Merchant
+  branches: [Branch]
+  totalMerchantEmployeesCount: Int
+  totalOrdersCount: Int
+  token: String
+  refreshToken: String
+  success: Boolean
+}
+
+type Owner {
+  _id: String
+  name: String
+  countryCode: String
+  mobile: String
+  email: String
+  password: String
+  cityId: String
+  countryId: String
+  uuid: String
+  mobileIsVerified: Boolean
+  emailIsVerified: Boolean
+  type: String
+  isDeleted: Boolean
+  otp_verify_type: OTP_VERIFICATION_TYPE
+  role: OWNER_ROLE
+  status: OWNER_STATUS
+  dateOfBirth: String
+  gender: String
+  createdAt: String
+  updatedAt: String
+}
+
+type RequestForgetPasswordRes {
+  result: Boolean
+}
+
+type VerifyForgetPasswordRes {
+  success: Boolean
+}
+
+type FindOneOwnerRes {
+  _id: String
+  name: String
+  countryCode: String
+  mobile: String
+  email: String
+  cityId: City
+  countryId: Country
+  uuid: String
+  mobileIsVerified: Boolean
+  emailIsVerified: Boolean
+  type: String
+  isDeleted: Boolean
+  otp_verify_type: String
+  role: OWNER_ROLE
+  status: OWNER_STATUS
+  dateOfBirth: String
+  gender: String
+}
+
+type OwnersMerchantEmployeesRequestChangEmailRes {
+  success: Boolean
+  counter: Int
+}
+
+type OwnersMerchantEmployeesRequestChangeMobileRes {
+  success: Boolean
+  counter: Int
+}
+
+type OwnersOrMerchantEmployeesRes {
+  _id: String
+  name: String
+  countryCode: String
+  mobile: String
+  email: String
+  cityId: String
+  countryId: String
+  uuid: String
+  mobileIsVerified: Boolean
+  emailIsVerified: Boolean
+  type: String
+  isDeleted: Boolean
+  otp_verify_type: String
+  role: OWNER_ROLE
+  status: OWNER_STATUS
+  dateOfBirth: String
+  gender: String
+  token: String
+  success: Boolean
+}
+
+type OwnersResendOtpRes {
+  success: Boolean
+}
+
+input OwnerFiltersQuery {
+  search: String
+  page: Int
+  limit: Int
+  paginate: Boolean
+  fields: Void
+  sort: Void
+  cities: [String]
+  mobile: String
+  email: String
+}
+
+type DashboardFindAllOwnersRes {
+  owners: [Client]
+  page: Int
+  pages: Int
+  length: Int
+}
+
+input AdminUpdateOwnerDto {
+  name: String!
+  countryCode: String!
+  mobile: String!
+  email: String!
+  password: String!
+  cityId: String!
+  countryId: String!
+  dateOfBirth: String
+  uuid: String
+  status: OWNER_STATUS
+}
+
+type UpdateOwnerByItselfRes {
+  _id: String
+  name: String
+  countryCode: String
+  mobile: String
+  email: String
+  password: String
+  cityId: City
+  countryId: Country
+  uuid: String
+  mobileIsVerified: Boolean
+  emailIsVerified: Boolean
+  type: String
+  isDeleted: Boolean
+  otp_verify_type: OTP_VERIFICATION_TYPE
+  role: OWNER_ROLE
+  status: OWNER_STATUS
+  dateOfBirth: String
+  gender: String
+  createdAt: String
+  updatedAt: String
+}
+
+type OwnersOrMerchantEmployeesDeleteAccountRes {
+  success: Boolean
+}
+
+type Mutation {
+  createOwner(createOwnerDto: CreateOwnerInput): Owner
+  ownersOrMerchantEmployeesVerifyMobile(verifyMobileOwnerDto: VerifyMobileOwnerInput): VerifyMobileRes
+  ownersOrMerchantEmployeesVerifyEmail(
+    bodyConfirmOwnerDto: BodyConfirmOwnerInput
+    paramsConfirmOwnerDto: ParamsConfirmOwnerInput
+  ): VerifyEmailRes
+  ownersOrMerchantemployeesLogin(loginOwnerDto: LoginOwnerInput): LoginRes
+  ownersOrMerchantEmployeesRequestForgetPassword(
+    requestForgetPasswordOwnerDto: RequestForgetPasswordOwnerInput
+  ): RequestForgetPasswordRes
+  ownersOrMerchantEmployeesVerifyForgetPassword(
+    verifyForgetPasswordOwnerDto: VerifyForgetPasswordOwnerInput
+  ): VerifyForgetPasswordRes
+  ownersOrMerchantEmployeesChangePassword(changePasswordOwnerDto: ChangePasswordOwnerInput): ChangePasswordRes
+  updateOwnerByItself(updateOwnerByItselfDto: UpdateOwnerByItselfInput): UpdateOwnerByItselfRes
+  ownersOrMerchantEmployeesRequestChangEmail(
+    requestChangeEmailOwnerDto: RequestChangeEmailOwnerInput
+  ): OwnersMerchantEmployeesRequestChangEmailRes
+  ownersOrMerchantEmployeesVerifyChangeEmail(verifyChangeEmailOwnerDto: VerifyChangeEmailOwnerInput): Owner
+  ownersOrMerchantEmployeesRequestChangeMobile(
+    requestChangeMobileOwnerDto: RequestChangeMobileOwnerInput
+  ): OwnersMerchantEmployeesRequestChangeMobileRes
+  ownersOrMerchantEmployeesVerifyChangeMobile(verifyChangeMobileOwnerDto: VerifyChangeMobileOwnerInput): Owner
+  ownersResendOtp(resendOtpOwnerDto: ResendOtpOwnerInput): OwnersResendOtpRes
+  dashboardUpdateOwner(id: String!, adminUpdateOwnerDto: AdminUpdateOwnerDto): Owner
+  ownerOrMerchantemployeeRefreshToken: LoginRes
+  ownersOrMerchantEmployeesDeleteAccount: OwnersOrMerchantEmployeesDeleteAccountRes
+}
+
+type Query {
+  findOneOwner(ownerId: String!): FindOneOwnerRes
+  ownersOrMerchantEmployees(ownerOrMerchantEmployeeId: String!): OwnersOrMerchantEmployeesRes
+  dashboardFindOwnerByMobileOrEmail(query: EmailOrMobileEnum): Owner
+  dashboardFindAllOwners(filters: OwnerFiltersQuery): DashboardFindAllOwnersRes
+}

@@ -1,0 +1,101 @@
+input ParamsInput {
+  search: String
+  productCategoryStatus: STATUS
+  productcategoriesIds: [String]
+  productStatus: STATUS
+  branchesIds: [String]
+  # build_status: MERCHANT_BUILD_STATUS
+  status: MERCHANT_STATUS
+}
+
+type MerchantsMenuRes {
+  menu: [ProductCategory]
+  productCategoriesCount: Int
+  productsCount: Int
+  productGroupsCount: Int
+  totalSalesPrice: Int
+}
+
+input MenuQueryDto {
+  branchId: String
+}
+
+type ClientsMenuRes {
+  menu: [ProductCategory]
+  avgProductsPrepTime: Int
+  avgProductsPrice: Int
+}
+
+input MenuUploadImageDto {
+  url: String
+}
+
+input CreateMenuUploadDto {
+  mobile: String
+  images: [MenuUploadImageDto]
+  notes: String
+}
+
+type CreateMerchantMenuUploadRes {
+  success: Boolean
+}
+
+type FindOneMerchantMenuUploadRes {
+  merchantId: String
+  name: String
+  translation: [TranslationMerchant]
+  menu_upload_status: MENU_UPLOAD_STATUS
+  menuUpload: MenuUpload
+}
+
+input MenuUploadFilterDto {
+  menu_upload_status: MENU_UPLOAD_STATUS
+  page: Int
+  limit: Int
+}
+
+type MenuUploadRes {
+  merchantId: String
+  name: String
+  translation: [TranslationMerchant]
+  menu_upload_status: MENU_UPLOAD_STATUS
+  menuUpload: MenuUpload
+}
+
+type FindAllMerchantsMenuUploadRes {
+  merchants: [MenuUploadRes]
+  page: Int
+  pages: Int
+  length: Int
+}
+
+type DashboardUpdateMerchantMenuUploadRes {
+  success: Boolean
+}
+
+input DashboardUpdateMenuUploadDto {
+  menu_upload_status: MENU_UPLOAD_STATUS!
+}
+
+type Query {
+  # Merchant
+  merchantsMenu(params: ParamsInput): MerchantsMenuRes
+
+  # Marketplace
+  clientsMenu(merchantId: String!, params: MenuQueryDto): ClientsMenuRes
+
+  # Dashboard
+  dashboardFindOneMerchantMenuUpload(merchantId: String!): FindOneMerchantMenuUploadRes
+  dashboardFindAllMerchantsMenuUpload(query: MenuUploadFilterDto): FindAllMerchantsMenuUploadRes
+}
+
+type Mutation {
+  # Merchant
+  createMerchantMenuUpload(createMenuUploadDto: CreateMenuUploadDto): CreateMerchantMenuUploadRes
+
+  # Dashboard
+  dashboardUpdateMerchantMenuUpload(
+    merchantId: String
+    dashboardUpdateMenuUploadDto: DashboardUpdateMenuUploadDto
+  ): DashboardUpdateMerchantMenuUploadRes
+}

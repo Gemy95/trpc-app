@@ -1,0 +1,123 @@
+scalar Void
+scalar ObjectId
+
+enum Status {
+  active
+  inActive
+}
+
+enum STATUS {
+  active
+  inActive
+}
+
+enum OTP_VERIFICATION_TYPE {
+  email
+  mobile
+}
+
+enum Gender {
+  male
+  female
+}
+
+enum DATE_TYPES {
+  today
+  week
+  month
+  custom
+}
+
+
+type Location {
+  type: String
+  coordinates: [Float]
+}
+
+input LocationInput {
+  type: String
+  coordinates: [Float]
+}
+
+type Translation {
+  _lang: String
+  name: String
+}
+
+input TranslationInput {
+  _lang: String
+  name: String
+}
+
+type BaseQuery {
+  search: String
+  page: Int
+  limit: Int
+  paginate: Boolean
+  fields: Void
+  sort: Void
+}
+
+input BaseQueryInput {
+  search: String
+  page: Int
+  limit: Int
+  paginate: Boolean
+  fields: Void
+  sort: Void
+}
+
+type GetAllDto {
+  page: Int
+  limit: Int
+  sortBy: String
+  paginate: Boolean
+  order: Int
+}
+
+input GetAllDtoInput {
+  page: Int
+  limit: Int
+  sortBy: String
+  paginate: Boolean
+  order: Int
+}
+
+type IRole {
+  nameArabic: String
+  nameEnglish: String
+  permissions: [IPermission]
+}
+
+input IRoleInput {
+  nameArabic: String
+  nameEnglish: String
+  permissions: [IPermissionInput]
+}
+
+type IPermission {
+  # labelArabic: String
+  # labelEnglish: String
+  value: String
+}
+
+input IPermissionInput {
+  # labelArabic: String
+  # labelEnglish: String
+  value: String
+}
+
+type Location {
+  type: String
+  coordinates: [Float]
+}
+
+input LocationInput {
+  type: String
+  coordinates: [Float]
+}
+
+enum AMOUNT_TYPE {
+  fixed
+  percentage
+}

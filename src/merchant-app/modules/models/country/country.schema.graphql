@@ -1,0 +1,59 @@
+scalar DateTime
+
+enum CountryStatusEnum {
+  active
+  inActive
+}
+
+type CountryTranslation {
+  _lang: String
+  name: String
+}
+
+type Country {
+  _id: String
+  name: String
+  client_status: CountryStatusEnum
+  stores_status: CountryStatusEnum
+  code: String
+  search: [String]
+  translation: [CountryTranslation]
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input CountryTranslationInput {
+  _lang: String
+  name: String
+}
+
+input CountryInput {
+  name: String
+  client_status: CountryStatusEnum
+  stores_status: CountryStatusEnum
+  code: String
+  search: [String]
+  translation: [CountryTranslationInput]
+}
+
+type ResponseMessage {
+  message: String
+}
+
+type ResponseFindAll {
+  countries: [Country]
+  page: Int
+  pages: Int
+  length: Int
+}
+
+type Query {
+  countries: ResponseFindAll
+  country(id: String!): Country
+}
+
+type Mutation {
+  createCountry(country: CountryInput!): Country
+  updateCountry(id: String!, country: CountryInput!): Country
+  deleteCountry(id: String!): ResponseMessage
+}

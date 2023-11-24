@@ -1,0 +1,52 @@
+type Favorite {
+  _id: String
+  clientId: Client
+  merchantId: Merchant
+  branchId: Branch
+  createdAt: String
+  updatedAt: String
+}
+
+input CreateFavoriteDto {
+  merchantId: String
+  branchId: String
+}
+
+type MarketplaceFavoriteLikeRes {
+  success: Boolean
+}
+
+input FavoriteQueryDto {
+  longitude: Float
+  latitude: Float
+  page: Int
+  limit: Int
+  sortBy: String
+  paginate: Boolean
+  order: Int
+}
+
+type MarketplaceFavoriteFindAllRes {
+  _id: String
+  merchant: Merchant
+  avgProductsPrepTime: Float
+  avgProductsPrice: Float
+  avgOrdersRating: Float
+  branch: Branch
+  dist: Float
+  categoriesIds: [Category]
+  tagsIds: [Tag]
+}
+
+type MarketplaceFavoriteUnLikeRes {
+  success: Boolean
+}
+
+type Mutation {
+  marketplaceFavoriteLike(createFavoriteDto: CreateFavoriteDto): MarketplaceFavoriteLikeRes
+  marketplaceFavoriteUnlike(merchantId: String!): MarketplaceFavoriteUnLikeRes
+}
+
+type Query {
+  marketplaceFavoriteFindAll(query: FavoriteQueryDto): MarketplaceFavoriteFindAllRes
+}

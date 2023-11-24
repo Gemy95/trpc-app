@@ -1,0 +1,32 @@
+
+type TranslationOption {
+  _lang: String
+  name: String
+}
+
+
+input TranslationOptionInput {
+  _lang: String
+  name: String
+}
+
+type ChargeDetails {
+  name: String
+  is_active: Boolean
+  type: AMOUNT_TYPE
+  amount: Float
+  translation: [TranslationOption]
+}
+
+type Invoice {
+  charges: [ChargeDetails]
+  total: Float
+}
+
+input ChargeDetailsInput {
+  name: String
+  is_active: Boolean
+  type: AMOUNT_TYPE
+  amount: Float
+  translation: [TranslationOptionInput]
+}

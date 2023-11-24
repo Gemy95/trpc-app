@@ -1,0 +1,56 @@
+[
+  {
+    "name_ar": "المقبلات",
+    "name_en": "Appetizers",
+    "status": "active",
+    "image": "https://shopex-uploads.s3.eu-central-1.amazonaws.com/dev/fde06312-8bb2-45c5-9629-a7d0bc0abda1-monika-grabkowska-9jdyCy-bMC4-unsplash-2.jpg"
+  },
+  {
+    "name_ar": "السلطة",
+    "name_en": "Salads",
+    "status": "inActive",
+    "image": "https://shopex-uploads.s3.eu-central-1.amazonaws.com/dev/36edeb8d-c243-4a06-802c-63992ce1e641-nadine-primeau-FfLlgRfL5l8-unsplash.jpg"
+  },
+  {
+    "name_ar": "التحلية",
+    "name_en": "Desserts",
+    "status": "active",
+    "image": "https://shopex-uploads.s3.eu-central-1.amazonaws.com/dev/46d63968-eafc-4085-9944-42e401d8620d-kobby-mendez-idTwDKt2j2o-unsplash.jpg"
+  },
+  {
+    "name_ar": "الاطباق الرئيسية",
+    "name_en": "Main dishes",
+    "status": "active",
+    "image": "https://shopex-uploads.s3.eu-central-1.amazonaws.com/dev/4968080e-d36a-4132-a4c3-eb8ec66679a1-sebastian-coman-photography-R3ZVMFqzbWQ-unsplash.jpg"
+  },
+  {
+    "name_ar": "المشروبات ساخنة",
+    "name_en": "Hot drinks",
+    "status": "active",
+    "image": "https://shopex-uploads.s3.eu-central-1.amazonaws.com/dev/f0fef344-7b0d-4a35-b23e-6e9116f6b5ec-merlene-goulet-ISFopTz7sBo-unsplash.jpg"
+  },
+  {
+    "name_ar": "المشروبات الباردة",
+    "name_en": "Cold drinks",
+    "status": "active",
+    "image": "https://shopex-uploads.s3.eu-central-1.amazonaws.com/dev/46d792bf-e4b6-4af3-9262-070907cecdac-melissa-walker-horn-gtDYwUIr9Vg-unsplash.jpg"
+  },
+  {
+    "name_ar": "المعجنات",
+    "name_en": "Pastries",
+    "status": "inActive",
+    "image": "https://shopex-uploads.s3.eu-central-1.amazonaws.com/dev/484539da-3e9f-47d8-9ab8-982dd2323a48-mink-mingle-qZ5lPCPvdXE-unsplash-2.jpg"
+  },
+  {
+    "name_ar": "عصير طبيعي",
+    "name_en": "Natural juice",
+    "status": "inActive",
+    "image": "https://shopex-uploads.s3.eu-central-1.amazonaws.com/dev/0b997abf-d9ae-491c-a67b-d8d30f8a8a19-vedrana-filipovic-vFuknaztGdY-unsplash.jpg"
+  },
+  {
+    "name_ar": "اللبن المخفوق",
+    "name_en": "Milkshake",
+    "status": "active",
+    "image": "https://shopex-uploads.s3.eu-central-1.amazonaws.com/dev/7dc1b117-d194-41cc-9ad2-8ead487db1fb-shardar-tarikul-islam-X1Wun0nCHOc-unsplash.jpg"
+  }
+]

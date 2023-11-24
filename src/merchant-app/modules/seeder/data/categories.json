@@ -1,0 +1,17 @@
+[
+  {
+    "name_ar": "كافيه",
+    "name_en": "Cafe",
+    "image": "https://shopex-uploads.s3.eu-central-1.amazonaws.com/dev/9ff5a910-49cc-4fad-850d-2d699e3e5d2b-toa-heftiba-QnUywvDdI1o-unsplash.jpg"
+  },
+  {
+    "name_ar": "مطعم",
+    "name_en": "Restaurant",
+    "image": "https://shopex-uploads.s3.eu-central-1.amazonaws.com/dev/1740581e-a029-44b0-bc95-4e7e6fa74afb-kyle-bushnell-hzsfX4PdDnM-unsplash.jpg"
+  },
+  {
+    "name_ar": "محل فواكه",
+    "name_en": "Fruit shop",
+    "image": "https://shopex-uploads.s3.eu-central-1.amazonaws.com/dev/94140e29-d3fe-44fe-a9eb-741c9fc438c5-ethan-lau-e9_tiIQixHM-unsplash.jpg"
+  }
+]

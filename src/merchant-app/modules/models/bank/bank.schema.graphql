@@ -1,0 +1,67 @@
+type BankTranslation {
+  _lang: String
+  name: String
+}
+
+input BankTranslationInput {
+  _lang: String
+  name: String
+}
+
+type Bank {
+  _id: String
+  name: String
+  logo: String
+  translation: [BankTranslation]
+  country: String
+  isDeleted: Boolean
+  createdAt: String
+  updatedAt: String
+}
+
+type BankRes {
+  _id: String
+  name: String
+  logo: String
+  translation: [BankTranslation]
+  country: Country
+  isDeleted: Boolean
+  createdAt: String
+  updatedAt: String
+}
+
+input CreateBankDto {
+  name: String!
+  logo: String!
+  country: String!
+  translation: [BankTranslationInput]
+}
+
+input UpdateBankDto {
+  name: String
+  logo: String
+  translation: [BankTranslationInput]
+  country: String
+}
+
+type FindAllBanksRes {
+  banks: [BankRes]
+  page: Int
+  pages: Int
+  length: Int
+}
+
+type ShoppexEmployeeDeleteBankRes {
+  succss: Boolean
+}
+
+type Mutation {
+  shoppexEmployeeCreateBank(createBankDto: CreateBankDto): Bank
+  shoppexEmployeeUpdateBank(bankId: String!, updateBankDto: UpdateBankDto): Bank
+  shoppexEmployeeDeleteBank(bankId: String!): ShoppexEmployeeDeleteBankRes
+}
+
+type Query {
+  findAllBanks: FindAllBanksRes
+  findOneBank(bankId: String!): BankRes
+}

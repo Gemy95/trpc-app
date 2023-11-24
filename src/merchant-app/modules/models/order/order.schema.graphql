@@ -1,0 +1,312 @@
+enum OrderRateStatus {
+  rated
+  ignored
+  notrated
+}
+
+enum ORDER_STATUS {
+  pending
+  accepted
+  inprogress
+  ready
+  active
+  delivered
+  expired
+  canceled_by_merchant
+  canceled_by_operation
+  canceled_by_client
+  canceled_by_employee
+  canceled_by_shoppex
+  rejected_by_merchant
+  rejected_by_operation
+  rejected_by_employee
+  rejected_by_shoppex
+  on_way_to_client
+  arrived_to_client
+  client_not_respond
+  client_not_delivered
+}
+
+enum PAYMENT_TYPES {
+  cash
+  visa
+  mada
+  mastercard
+  apple
+  pay
+}
+
+enum ORDER_TYPE {
+  pickup
+  car_pickup
+  offline
+  dining
+  book
+  offline_book
+  delivery
+  store_delivery
+}
+
+type Order {
+  _id: String
+  clientId: String
+  branchId: String
+  invoice: Invoice
+  status: ORDER_STATUS
+  items: [Item]
+  clientNotes: [String]
+  merchantNotes: [String]
+  estimatedPreparationTime: String
+  paymentType: PAYMENT_TYPES
+  isDeleted: Boolean
+  localOrder: Boolean
+  orderType: ORDER_TYPE
+  orderCreatedBy: String
+  orderRefId: String
+  orderSeqId: Int
+  rateStatus: OrderRateStatus
+  rejectedNotes: [String]
+  createdAt: String
+  updatedAt: String
+  driverId: String
+  driver: MerchantEmployee
+  tableId: String
+  table: Table
+  couponId: String
+  coupon: Coupon
+}
+
+input OptionsInput {
+  _id: String
+  name: String
+  extraPrice: Float
+}
+
+input GroupsInput {
+  productGroupId: String
+  options: [OptionsInput]
+}
+
+input ItemInput {
+  count: Int
+  productId: String
+  groups: [GroupsInput]
+}
+
+input CreateOrderDto {
+  branchId: String
+  clientNotes: [String]
+  paymentType: PAYMENT_TYPES
+  orderType: ORDER_TYPE
+  items: [ItemInput]
+  clientId: String
+  tableId: String
+  couponCode: String
+}
+
+input DashboardOrderQueryDto {
+  orderRefId: String
+  clientMobile: String
+  clientEmail: String
+  clientName: String
+  transactionRefId: String
+  orderType: String
+  fromCreatedAt: String
+  toCreatedAt: String
+  status: ORDER_STATUS
+  page: Int
+  limit: Int
+  paginate: Boolean
+  fields: Void
+  sort: Void
+}
+
+type DashboardOrderByBranch {
+  _id: String
+  merchant: Merchant
+  status: ORDER_STATUS
+  estimatedPreparationTime: String
+  paymentType: PAYMENT_TYPES
+  isDeleted: Boolean
+  localOrder: Boolean
+  orderType: ORDER_TYPE
+  orderRefId: String
+  orderSeqId: Int
+  createdAt: String
+  updatedAt: String
+  branch: Branch
+  orderCreatedBy: User
+  invoice: Invoice
+  transaction: Transaction
+  items: [Item]
+  rejectedNotes: [String]
+  driverId: String
+  driver: MerchantEmployee
+  tableId: String
+  table: Table
+  couponId: String
+  coupon: Coupon
+}
+
+type DashboardFindAllOrdersByBranchRes {
+  Orders: [DashboardOrderByBranch]
+  Delivered: Int
+  Ready: Int
+  Accepted: Int
+  CanceledByStore: Int
+  Pending: Int
+  page: Int
+  pageCount: Int
+  length: Int
+}
+
+type DashboardOrderClientHistoryRes {
+  total: Int
+  canceled: Int
+}
+
+input DashboardOrderQueryDto {
+  page: Int
+  limit: Int
+  paginate: Boolean
+  fields: Void
+  sort: Void
+  orderRefId: String
+  clientMobile: String
+  clientEmail: String
+  clientName: String
+  transactionRefId: String
+  orderType: String
+  fromCreatedAt: String
+  toCreatedAt: String
+  status: ORDER_STATUS
+}
+
+type DashboardOperationFindAllOrdersRes {
+  Orders: [Order]
+  Delivered: Int
+  AcceptedAndReady: Int
+  CanceledByStore: Int
+  Pending: Int
+  page: Int
+  pageCount: Int
+  length: Int
+}
+
+type ItemOrderRes {
+  count: Int
+  productId: Product
+  groups: [Groups]
+}
+
+type DashboardOrderRes {
+  _id: String
+  invoice: Invoice
+  status: ORDER_STATUS
+  clientNotes: [String]
+  merchantNotes: [String]
+  estimatedPreparationTime: String
+  localOrder: Boolean
+  orderType: ORDER_TYPE
+  orderRefId: String
+  orderSeqId: Int
+  rateStatus: OrderRateStatus
+  createdAt: String
+  updatedAt: String
+  groups: Groups
+  items: [ItemOrderRes]
+  orderCreatedBy: User
+  merchant: Merchant
+  branch: Branch
+  rejectedNotes: [String]
+  paymentType: PAYMENT_TYPES
+  driverId: String
+  driver: MerchantEmployee
+  tableId: String
+  table: Table
+  couponId: String
+  coupon: Coupon
+  clientId: String
+  client: Client
+}
+
+type DashboardOrderActionRes {
+  _id: String
+  invoice: Invoice
+  status: ORDER_STATUS
+  clientNotes: [String]
+  merchantNotes: [String]
+  estimatedPreparationTime: String
+  localOrder: Boolean
+  orderType: ORDER_TYPE
+  orderRefId: String
+  orderSeqId: Int
+  rateStatus: OrderRateStatus
+  createdAt: String
+  updatedAt: String
+  groups: Groups
+  items: [ItemOrderRes]
+  orderCreatedBy: User
+  branchId: Branch
+  rejectedNotes: [String]
+  driverId: String
+  driver: MerchantEmployee
+  tableId: String
+  table: Table
+  couponId: String
+  coupon: Coupon
+}
+
+input DashboardOrderRejectDto {
+  outOfStockProductsIds: [String]
+  rejectedNotes: [String]
+}
+
+input DashboardOrderAcceptedDto {
+  estimatedPreparationTime: String
+  driverId: String
+}
+
+input DashboardFindAllClientsClusteringDto {
+  fromCreatedAt: String
+  toCreatedAt: String
+  branchesIds: [String]
+  # page: Int
+  # limit: Int
+  # paginate: Boolean
+  # fields: Void
+  # sort: Void
+}
+
+type ClusterCustomers {
+  _id: String
+  name: String
+  countryCode: String
+  mobile: String
+  email: String
+  location: Location
+  locationDelta: [Float]
+}
+
+type DashboardFindAllClientsClusteringRes {
+  _id: String
+  count: Int
+  customers: [ClusterCustomers]
+}
+
+type Mutation {
+  dashboardCreateOrder(createOrderDto: CreateOrderDto): DashboardOrderRes
+  dashboardOrderAccept(orderId: String, dashboardOrderAcceptedDto: DashboardOrderAcceptedDto): DashboardOrderActionRes
+  dashboardOrderCancel(orderId: String): DashboardOrderActionRes
+  dashboardOrderReject(orderId: String, dashboardOrderRejectDto: DashboardOrderRejectDto): DashboardOrderActionRes
+  dashboardOrderReady(orderId: String): DashboardOrderActionRes
+  dashboardOrderDelivered(orderId: String): DashboardOrderActionRes
+}
+
+type Query {
+  dashboardFindAllOrdersByBranch(branchId: String!, query: DashboardOrderQueryDto): DashboardFindAllOrdersByBranchRes
+  dashboardFindOneOrder(orderId: String!): DashboardOrderRes
+  dashboardOrderClientHistory(merchantId: String, clientId: String): DashboardOrderClientHistoryRes
+  dashboardOperationFindAllOrders(query: DashboardOrderQueryDto): DashboardOperationFindAllOrdersRes
+  dashboardFindAllClientsClustering(query: DashboardFindAllClientsClusteringDto): [ClusterCustomers]
+}

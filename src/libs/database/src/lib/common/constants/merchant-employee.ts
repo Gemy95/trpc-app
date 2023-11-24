@@ -1,0 +1,30 @@
+export const MERCHANT_EMPLOYEE_ACTIVE_STATUS = 'active';
+export const MERCHANT_EMPLOYEE_INACTIVE_STATUS = 'inActive';
+export const MERCHANT_EMPLOYEE_BANNED_STATUS = 'banned';
+
+export enum MERCHANT_EMPLOYEE_STATUS {
+  MERCHANT_EMPLOYEE_ACTIVE_STATUS = 'active',
+  MERCHANT_EMPLOYEE_INACTIVE_STATUS = 'inActive',
+  MERCHANT_EMPLOYEE_BANNED_STATUS = 'banned',
+}
+
+export const REDIS_MERCHANT_EMPLOYEE_NAME_SPACE = 'redis_merchant_employee_name_space';
+
+export enum MERCHANT_EMPLOYEE_JOB {
+  CASHIER = 'cashier',
+  SELLER = 'seller',
+  MANAGER = 'manager',
+  GUEST = 'guest',
+  EMPLOYEE = 'employee',
+  DELIVERY = 'delivery',
+  CHEF = 'chef',
+  DEVELOPER = 'developer',
+}
+
+export const CASHIER = MERCHANT_EMPLOYEE_JOB.CASHIER;
+export const SELLER = MERCHANT_EMPLOYEE_JOB.SELLER;
+export const MANAGER = MERCHANT_EMPLOYEE_JOB.MANAGER;
+export const GUEST = MERCHANT_EMPLOYEE_JOB.GUEST;
+export const EMPLOYEE = MERCHANT_EMPLOYEE_JOB.EMPLOYEE;
+export const DELIVERY = MERCHANT_EMPLOYEE_JOB.DELIVERY;
+export const CHEF = MERCHANT_EMPLOYEE_JOB.CHEF;

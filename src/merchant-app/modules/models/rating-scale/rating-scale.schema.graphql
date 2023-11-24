@@ -1,0 +1,41 @@
+
+
+type RatingScale {
+  name: String
+  translation: [Translation]
+  image: String
+  level: Int
+  createdAt: String
+  updatedAt: String
+}
+
+input CreateRatingScaleDto {
+  nameArabic: String!
+  nameEnglish: String!
+  image: String
+  level: Int!
+}
+
+input UpdateRatingScaleDto {
+  nameArabic: String
+  nameEnglish: String
+  image: String
+  level: Int
+}
+
+type MarketplaceFindAllRatingScaleRes {
+  ratingscales: [RatingScale]
+  page: Int
+  pages: Int
+  length: Int
+}
+
+type Mutation {
+  dashboardCreateRatingScale (createRatingScaleDto: CreateRatingScaleDto) : RatingScale
+  dashboardUpdateRatingScale (id: String!, updateRatingScaleDto: UpdateRatingScaleDto) : RatingScale
+}
+
+type Query {
+  marketplaceFindAllRatingScale (params: GetAllDtoInput) : MarketplaceFindAllRatingScaleRes
+  dashboardFindOneRatingScale (id: String!) : RatingScale
+}

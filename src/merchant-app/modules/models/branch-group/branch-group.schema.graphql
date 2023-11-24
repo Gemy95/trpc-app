@@ -1,0 +1,69 @@
+type BranchGroup {
+  _id: String
+  name: String
+  location: Location
+  translation: [Translation]
+  city: String
+  createdAt: String
+  updatedAt: String
+}
+
+type BranchGroupAndDistance {
+  _id: String
+  name: String
+  location: Location
+  translation: [Translation]
+  city: String
+  distance: Float
+  createdAt: String
+  updatedAt: String
+}
+
+input BranchGroupInput {
+  nameArabic: String!
+  nameEnglish: String!
+  longitude: Float!
+  latitude: Float!
+  city: String!
+}
+
+input UpdateBranchGroupInput {
+  nameArabic: String
+  nameEnglish: String
+  longitude: Float
+  latitude: Float
+  city: String
+}
+
+type FindAllBranchGroupsRes {
+  page: Int
+  pages: Int
+  length: Int
+  branchgroups: [BranchGroupAndDistance]
+}
+
+type ShoppexEmployeeDeleteBranchGroupRes {
+  success: Boolean
+}
+
+input FindAllBranchGroupsInput {
+  longitude: Float
+  latitude: Float
+  citiesIds: [String]
+  page: Int
+  limit: Int
+  sortBy: String
+  paginate: Boolean
+  order: Int
+}
+
+type Mutation {
+  shoppexEmployeeCreateBranchGroup(createBranchGroupDto: BranchGroupInput): BranchGroup
+  shoppexEmployeeUpdateBranchGroup(branchGroupId: String!, updateBranchGroupDto: UpdateBranchGroupInput): BranchGroup
+  shoppexEmployeeDeleteBranchGroup(branchGroupId: String!): ShoppexEmployeeDeleteBranchGroupRes
+}
+
+type Query {
+  findAllBranchGroups(params: FindAllBranchGroupsInput): FindAllBranchGroupsRes
+  findOneBranchGroup(branchGroupId: String!): BranchGroup
+}

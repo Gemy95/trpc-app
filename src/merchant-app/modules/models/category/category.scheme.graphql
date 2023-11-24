@@ -1,0 +1,78 @@
+# Definitions
+scalar DateTime
+
+# Types
+
+type Category {
+  _id: String
+  name: String
+  status: ActiveStatus
+  search: [String]
+  image: String
+  stores_visibility: Boolean
+  client_visibility: Boolean
+  translation: [Translation]
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type CategoryAndTag {
+  _id: String
+  name: String
+  status: ActiveStatus
+  search: [String]
+  image: String
+  stores_visibility: Boolean
+  client_visibility: Boolean
+  translation: [Translation]
+  createdAt: DateTime
+  updatedAt: DateTime
+  tags: [Tag]
+}
+
+type Res {
+  categories: [Category]
+  page: Int
+  length: Int
+  pages: Int
+}
+
+type RemoveRes {
+  success: Boolean
+  result: Category
+  message: String
+  error: String
+}
+
+# CategoryInput
+input CategoryInput {
+  name: String
+  status: ActiveStatus
+  image: String
+  stores_visibility: Boolean
+  client_visibility: Boolean
+  translation: [TranslationInput]
+}
+
+type MarketplaceFindAllCategoriesRes {
+  categories: [CategoryAndTag]
+  page: Int
+  pages: Int
+  length: Int
+}
+
+# Queries
+type Query {
+  categories: Res
+  category(categoryId: ID!): Category
+
+  # Marketplace
+  marketplaceFindAllCategories(query: GetAllDtoInput): MarketplaceFindAllCategoriesRes
+}
+
+# Mutations
+type Mutation {
+  createCategory(category: CategoryInput!): Category
+  updateCategory(id: ID!, category: CategoryInput!): Category
+  removeCategory(id: ID!): RemoveRes
+}

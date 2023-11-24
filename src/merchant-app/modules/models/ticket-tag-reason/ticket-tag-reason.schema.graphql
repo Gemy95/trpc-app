@@ -1,0 +1,58 @@
+type TagReasonTranslation {
+  _lang: String
+  description: String
+}
+
+input TagReasonTranslationInput {
+  _lang: String
+  description: String
+}
+
+type TagReason {
+  description: String
+  tag: String
+  isDeleted: Boolean
+  translation: [TagReasonTranslation]
+}
+
+type TagReasonRes {
+  description: String
+  tag: TicketTag
+  isDeleted: Boolean
+  translation: [TagReasonTranslation]
+}
+
+input CreateTicketsTagReasonDto {
+  descriptionArabic: String!
+  descriptionEnglish: String!
+}
+
+input UpdateTicketsTagReasonDto {
+  descriptionArabic: String
+  descriptionEnglish: String
+}
+
+type FindAllTicketTagReasonRes {
+  tagreasons: [TagReasonRes]
+  page: Int
+  pages: Int
+  length: Int
+}
+
+type FindForDashboardTicketTagReasonRes {
+  tagreasons: [TagReasonRes]
+  page: Int
+  pages: Int
+  length: Int
+}
+
+type Mutation {
+  createTicketTagReason(tag: String!, createTicketsTagReasonDto: CreateTicketsTagReasonDto): TagReason
+  updateOneTicketTagReason(id: String!, updateTicketsTagReasonDto: UpdateTicketsTagReasonDto): TagReason
+  removeTicketTagReason(id: String!): TagReason
+}
+
+type Query {
+  findAllTicketTagReasons(tag: String!, params: GetAllDtoInput): FindAllTicketTagReasonRes
+  findForDashboardTicketTagReasons(params: GetAllDtoInput): FindForDashboardTicketTagReasonRes
+}

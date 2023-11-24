@@ -1,0 +1,454 @@
+# enum BRANCH_BUILD_STATUS {
+#   pending
+#   approved
+#   rejected
+# }
+
+# enum BRANCH_RELEASE_STATUS {
+#   active
+#   inActive
+#   banned
+# }
+
+enum BRANCH_VISIBILITY_STATUS {
+  online
+  offline
+  busy
+  closed
+}
+
+enum BRANCH_RESERVATION_STATUS {
+  none
+  pending
+  approved
+  rejected
+}
+
+enum BRANCH_STATUS {
+  pending
+  approved
+  rejected
+  banned
+}
+
+enum BRANCH_STATUS_TAGS {
+  production_ready
+  staging_ready
+  under_review
+  need_action
+  review_docs
+}
+
+type ReservationTranslation {
+  _lang: String
+  name: String
+  content: String
+}
+
+input ReservationTranslationInput {
+  _lang: String
+  name: String
+  content: String
+}
+
+type BranchTranslation {
+  _lang: String
+  name: String
+}
+
+input BranchTranslationInput {
+  _lang: String
+  name: String
+}
+
+type Duration {
+  startAt: String
+  endAt: String
+}
+
+input DurationInput {
+  startAt: String
+  endAt: String
+}
+
+type WorkingHours {
+  day: DAYS
+  durations: [Duration]
+}
+
+input WorkingHoursInput {
+  day: DAYS
+  durations: [DurationInput]
+}
+
+type DaysInstructions {
+  content: String
+  translation: [ReservationTranslation]
+}
+
+input DaysInstructionsInput {
+  content: String
+  translation: [ReservationTranslationInput]
+}
+type ClientsInstructions {
+  content: String
+  translation: [ReservationTranslation]
+}
+
+input ClientsInstructionsInput {
+  content: String
+  translation: [ReservationTranslationInput]
+}
+
+type BranchInstructions {
+  content: String
+  translation: [ReservationTranslation]
+}
+
+input BranchInstructionsInput {
+  content: String
+  translation: [ReservationTranslationInput]
+}
+
+type CancelPolicyInstructions {
+  content: String
+  translation: [ReservationTranslation]
+}
+
+input CancelPolicyInstructionsInput {
+  content: String
+  translation: [ReservationTranslationInput]
+}
+
+type Feature {
+  icon: String
+  content: String
+  translation: [ReservationTranslation]
+}
+
+input FeatureInput {
+  icon: String
+  content: String
+  translation: [ReservationTranslationInput]
+}
+
+type ReservationsSettings {
+  enabled: Boolean
+  isEnabledWaitingList: Boolean
+  waitingListCapacity: Int
+  initialPrice: Float
+  averageReservationPeriod: Float
+  separationTimeBetweenEachReservation: Float
+  clientsInstructions: [ClientsInstructions]
+  branchInstructions: [BranchInstructions]
+  features: [Feature]
+  cancelPolicyInstructions: [CancelPolicyInstructions]
+  enableSharingReservation: Boolean
+  enableReservationForStore: Boolean 
+  enableReservationForMobileClients: Boolean 
+}
+
+input ReservationsSettingsInput {
+  enabled: Boolean
+  isEnabledWaitingList: Boolean
+  waitingListCapacity: Int
+  initialPrice: Float
+  averageReservationPeriod: Float
+  separationTimeBetweenEachReservation: Float
+  clientsInstructions: [ClientsInstructionsInput]
+  branchInstructions: [BranchInstructionsInput]
+  features: [FeatureInput]
+  cancelPolicyInstructions: [CancelPolicyInstructionsInput]
+  enableSharingReservation: Boolean
+  enableReservationForStore: Boolean 
+  enableReservationForMobileClients: Boolean 
+}
+
+type ReservationHours {
+  startAt: String
+  endAt: String
+  avgClientLifeTime: Float
+  capacityPerAverageClientTime: Int
+  disabled: Boolean
+  capacity: Int
+  reservations: [Reservation]
+}
+
+input ReservationHoursInput {
+  startAt: String
+  endAt: String
+  avgClientLifeTime: Float
+  capacityPerAverageClientTime: Int
+  disabled: Boolean
+  capacity: Int
+}
+
+type ReservationsDays {
+  available: Boolean
+  day: String
+  workingHours: [ReservationHours]
+  disabled: Boolean
+  full_reserved: Boolean
+  instructions: [DaysInstructions]
+}
+
+input ReservationsDaysInput {
+  available: Boolean
+  day: DAYS
+  workingHours: [ReservationHoursInput]
+  disabled: Boolean
+  full_reserved: Boolean
+  instructions: [DaysInstructionsInput]
+}
+
+type Branch {
+  _id: String
+  name: String
+  search: [String]
+  mobile: String
+  address: String
+  cityId: String
+  merchantId: String
+  ownerId: String
+  visibleToClients: Boolean
+  status: BRANCH_STATUS
+  status_tags: BRANCH_STATUS_TAGS
+  visibility_status: BRANCH_VISIBILITY_STATUS
+  notes: [String]
+  isFreezing: Boolean
+  location: Location
+  locationDelta: [Float]
+  workingHours: [WorkingHours]
+  reservationsDays: [ReservationsDays]
+  reservationsSettings: ReservationsSettings
+  reservationsInstructions: String
+  pickupInstructions: String
+  deliveryInstructions: String
+  translation: [BranchTranslation]
+  isDeleted: Boolean
+  client_visits: Int
+  approvedBy: String
+  inReview: Boolean
+  reservation_status: BRANCH_RESERVATION_STATUS
+  createdAt: String
+  updatedAt: String
+  start_subscription_date: String
+  branchGroup: String
+  self_delivery: Boolean
+  # initial_store_fee: ChargeDetails
+  store_delivery_fee: ChargeDetails
+  fees_delivery_per_kilometer: Float
+}
+
+input CreateBranchDto {
+  nameArabic: String
+  nameEnglish: String
+  mobile: String!
+  cityId: String!
+  address: String
+  longitude: Float
+  latitude: Float
+  longitudeDelta: Int
+  latitudeDelta: Int
+  notes: [String]
+  workingHours: [WorkingHoursInput]
+  # reservationsDays: [ReservationsDaysInput]
+  # reservationsSettings: ReservationsSettingsInput
+  reservationsInstructions: String
+  pickupInstructions: String
+  deliveryInstructions: String
+  products: String
+  branchGroup: String
+  self_delivery: Boolean
+  # initial_store_fee: ChargeDetailsInput
+  store_delivery_fee: ChargeDetailsInput
+  fees_delivery_per_kilometer: Float
+}
+
+type FindAllBranchesResult {
+  _id: String
+  name: String
+  search: [String]
+  mobile: String
+  address: String
+  cityId: String
+  merchantId: String
+  ownerId: String
+  uuid: String
+  visibleToClients: String
+  status: BRANCH_STATUS
+  status_tags: BRANCH_STATUS_TAGS
+  visibility_status: BRANCH_VISIBILITY_STATUS
+  notes: [String]
+  isFreezing: String
+  location: Location
+  locationDelta: [Float]
+  workingHours: [WorkingHours]
+  reservationsDays: [ReservationsDays]
+  reservationsSettings: ReservationsSettings
+  reservationsInstructions: String
+  pickupInstructions: String
+  deliveryInstructions: String
+  translation: [BranchTranslation]
+  isDeleted: Boolean
+  client_visits: Int
+  createdAt: String
+  updatedAt: String
+  city: City
+  totalOrdersCount: Int
+  totalActiveOrdersCount: Int
+  totalBranchEmployeesCount: Int
+  reservation_status: BRANCH_RESERVATION_STATUS
+  inReview: Boolean
+  start_subscription_date: String
+  branchGroup: String
+  self_delivery: Boolean
+  # initial_store_fee: ChargeDetails
+  store_delivery_fee: ChargeDetails
+  fees_delivery_per_kilometer: Float
+}
+
+type FindAllBranchesRes {
+  branches: [FindAllBranchesResult]
+  page: Int
+  pages: Int
+  length: Int
+}
+
+type BranchDetailsRes {
+  _id: String
+  name: String
+  search: [String]
+  mobile: String
+  address: String
+  cityId: String
+  city: City
+  merchantId: String
+  ownerId: String
+  uuid: String
+  visibleToClients: String
+  status: BRANCH_STATUS
+  status_tags: BRANCH_STATUS_TAGS
+  visibility_status: BRANCH_VISIBILITY_STATUS
+  notes: [String]
+  isFreezing: String
+  location: Location
+  locationDelta: [Float]
+  workingHours: [WorkingHours]
+  reservationsDays: [ReservationsDays]
+  reservationsSettings: ReservationsSettings
+  reservationsInstructions: String
+  pickupInstructions: String
+  deliveryInstructions: String
+  translation: [BranchTranslation]
+  isDeleted: Boolean
+  client_visits: Int
+  createdAt: String
+  updatedAt: String
+  total_orders_count: Int
+  total_active_orders_count: Int
+  total_clients_count: Int
+  total_orders_amount: Int
+  reservation_status: BRANCH_RESERVATION_STATUS
+  inReview: Boolean
+  start_subscription_date: String
+  branchGroup: String
+  self_delivery: Boolean
+  # initial_store_fee: ChargeDetails
+  store_delivery_fee: ChargeDetails
+  fees_delivery_per_kilometer: Float
+  totalWaitingListReservationsCount: Int
+}
+
+input ChangeStatusDto {
+  visibility_status: BRANCH_VISIBILITY_STATUS
+  notes: [String]
+}
+
+input UpdateBranchDto {
+  nameArabic: String
+  nameEnglish: String
+  mobile: String
+  cityId: String
+  address: String
+  longitude: Float
+  latitude: Float
+  longitudeDelta: Int
+  latitudeDelta: Int
+  workingHours: [WorkingHoursInput]
+  reservationsDays: [ReservationsDaysInput]
+  reservationsSettings: ReservationsSettingsInput
+  reservationsInstructions: String
+  pickupInstructions: String
+  deliveryInstructions: String
+  products: String
+  branchGroup: String
+  self_delivery: Boolean
+  # initial_store_fee: ChargeDetailsInput
+  store_delivery_fee: ChargeDetailsInput
+  fees_delivery_per_kilometer: Float
+}
+
+input UpdateBranchDtoByShoppexEmployee {
+  nameArabic: String
+  nameEnglish: String
+  mobile: String
+  cityId: String
+  longitude: Float
+  latitude: Float
+  longitudeDelta: Int
+  latitudeDelta: Int
+  workingHours: [WorkingHoursInput]
+  reservationsDays: [ReservationsDaysInput]
+  reservationsSettings: ReservationsSettingsInput
+  reservationsInstructions: String
+  pickupInstructions: String
+  deliveryInstructions: String
+  products: String
+  status: BRANCH_STATUS
+  status_tags: BRANCH_STATUS_TAGS
+  branchGroup: String
+  self_delivery: Boolean
+  # initial_store_fee: ChargeDetailsInput
+  store_delivery_fee: ChargeDetailsInput
+  fees_delivery_per_kilometer: Float
+}
+
+input UpdateBranchStatusByMerchantEmployeeOrOwnerDto {
+  visibility_status: BRANCH_VISIBILITY_STATUS
+}
+
+input FindAllBranchDto {
+  search: String
+  page: Int
+  limit: Int
+  paginate: Boolean
+  fields: Void
+  sort: Void
+  cities: [String]
+  status: BRANCH_STATUS
+  status_tags: BRANCH_STATUS_TAGS
+  visibility_status: BRANCH_VISIBILITY_STATUS
+}
+
+type Query {
+  findAllBranches(merchantId: String!, query: FindAllBranchDto): FindAllBranchesRes
+  branchDetails(branchId: String!, merchantId: String!): BranchDetailsRes
+}
+
+type Mutation {
+  createBranch(merchantId: String!, createBranchDto: CreateBranchDto!): Branch
+  removeBranch(branchId: String!, merchantId: String!): Branch
+  reApplyBranch(branchId: String!, merchantId: String!): Branch
+  freezingBranch(branchId: String!, merchantId: String!): Branch
+  onlineOrOfflineBranch(changeStatusDto: ChangeStatusDto!, branchId: String!, merchantId: String!): Branch
+  shoppexEmployeeUpdateBranch(branchId: String!, updateBranchDto: UpdateBranchDtoByShoppexEmployee!): Branch
+  merchantEmployeeOrOwnerUpdateBranchstatus(
+    merchantId: String!
+    branchId: String!
+    updateBranchStatusByMerchantEmployeeOrOwnerDto: UpdateBranchStatusByMerchantEmployeeOrOwnerDto
+  ): Branch
+  updateBranch(id: String!, updateBranchDto: UpdateBranchDto!): Branch
+  publishBranch(id: String!): Branch
+  startBranchSubscription(id: String!): Branch
+}

@@ -1,0 +1,19 @@
+type Time {
+  from: String!
+  to: String!
+}
+
+input TimeInput {
+  from: String!
+  to: String!
+}
+
+type MealsTime {
+  name: String
+  times: Time
+}
+
+input MealsTimeInput {
+  name: String
+  times: TimeInput
+}

@@ -1,0 +1,75 @@
+enum ContentType {
+  MERCHANT_PRIVACY
+  OWNER_PRIVACY
+  CLIENT_PRIVACY
+  CLIENT_TERMS
+  MERCHANT_TERMS
+  OWNER_TERMS
+  CLIENT_FAQ
+  MERCHANT_FAQ
+  OWNER_FAQ
+}
+
+type TextTranslation {
+  _lang: String!
+  text: String!
+}
+
+input TextTranslationInput {
+  _lang: String!
+  text: String!
+}
+
+type QuestionAndAnswersContent {
+  question: String
+  answer: String
+}
+
+input QuestionAndAnswersContentInput {
+  question: String
+  answer: String
+}
+
+type Content {
+  _id: String
+  text: String
+  translation: [TextTranslation]
+  content_type: ContentType
+  faq: [QuestionAndAnswersContent]
+  createdAt: String
+  updatedAt: String
+}
+
+type ContentResponse {
+  content: Content
+  message: String
+  success: Boolean
+  error: String
+}
+
+input ContentInput {
+  text: String!
+  content_type: ContentType!
+  faq: [QuestionAndAnswersContentInput]
+  translation: [TextTranslationInput]!
+}
+
+input UpdateContentInput {
+  text: String
+  faq: [QuestionAndAnswersContentInput]
+  translation: [TextTranslationInput]
+}
+
+input ContentFilter {
+  content_type: ContentType
+}
+
+type Query {
+  content(contentType: ContentFilter): [Content]
+}
+
+type Mutation {
+  createContent(content: ContentInput!): ContentResponse
+  updateContent(_id: String!, content: UpdateContentInput): Content
+  removeContent(_id: String!): Content
+}

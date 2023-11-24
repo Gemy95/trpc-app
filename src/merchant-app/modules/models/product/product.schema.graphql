@@ -1,0 +1,308 @@
+enum PRODUCT_BUILD_STATUS {
+  pending
+  approved
+  rejected
+}
+
+enum PRODUCT_RELEASE_STATUS {
+  staging
+  production
+  testing
+}
+
+enum PRODUCT_MEALS_TIME {
+  breakfast
+  launch
+  dinner
+}
+
+type ProductTranslation {
+  _lang: String
+  name: String
+  description: String
+}
+
+input ProductTranslationInput {
+  _lang: String
+  name: String
+  description: String
+}
+
+type ProductImageTranslation {
+  _lang: String
+  title: String
+  description: String
+}
+
+input ProductImageTranslationInput {
+  _lang: String
+  title: String
+  description: String
+}
+
+type ProductImage {
+  url: String
+  title: String
+  description: String
+  new: Boolean
+  translation: [ProductImageTranslation]
+}
+
+input ProductImageInput {
+  url: String!
+  title: String
+  description: String
+  new: Boolean
+  translation: [ProductImageTranslationInput]
+}
+
+type ProductGroupsOptionsOrders {
+  _id: String
+  serialDisplayNumber: Int
+}
+
+input ProductGroupsOptionsOrdersInput {
+  _id: String
+  serialDisplayNumber: Int
+}
+
+type ProductGroupsOrders {
+  id: String
+  serialDisplayNumber: Int
+  options: [ProductGroupsOptionsOrders]
+}
+
+input ProductGroupsOrdersInput {
+  id: String!
+  serialDisplayNumber: Int
+  options: [ProductGroupsOptionsOrdersInput]
+}
+
+type Product {
+  _id: String
+  name: String
+  description: String
+  preparationTime: Int
+  productGroupsIds: [ProductGroup]
+  categoriesIds: [ProductCategory]
+  merchantId: String
+  branchesIds: [Branch]
+  images: [ProductImage]
+  mainImage: ProductImage
+  price: Int
+  numberOfSale: Int
+  translation: [ProductTranslation]
+  isDeleted: Boolean
+  build_status: PRODUCT_BUILD_STATUS
+  release_status: PRODUCT_RELEASE_STATUS
+  status: STATUS
+  calories: Int
+  serialDisplayNumber: Int
+  inReview: Boolean
+  discount: Discount
+  approvedBy: String
+  notes: [String]
+  mealsTime: [MealsTime]
+  totalSalePrice: Float
+  createdAt: String
+  updatedAt: String
+  productGroupsOrders: [ProductGroupsOrders]
+  count: Int
+  remainingQuantity: Int
+  quantity: Int
+}
+
+type ProductRes {
+  _id: String
+  name: String
+  description: String
+  preparationTime: Int
+  productGroupsIds: [String]
+  categoriesIds: [String]
+  merchantId: String
+  branchesIds: [String]
+  images: [ProductImage]
+  mainImage: ProductImage
+  price: Int
+  numberOfSale: Int
+  translation: [ProductTranslation]
+  isDeleted: Boolean
+  build_status: PRODUCT_BUILD_STATUS
+  release_status: PRODUCT_RELEASE_STATUS
+  status: STATUS
+  calories: Int
+  serialDisplayNumber: Int
+  inReview: Boolean
+  discount: Discount
+  approvedBy: String
+  notes: [String]
+  mealsTime: [MealsTime]
+  totalSalePrice: Float
+  createdAt: String
+  updatedAt: String
+  productGroupsOrders: [ProductGroupsOrders]
+  remainingQuantity: Int
+  quantity: Int
+}
+
+type FindOneProductRes {
+  _id: String
+  name: String
+  description: String
+  preparationTime: Int
+  productGroupsIds: [String]
+  categoriesIds: [String]
+  merchantId: String
+  branchesIds: [String]
+  images: [ProductImage]
+  mainImage: ProductImage
+  price: Int
+  numberOfSale: Int
+  translation: [ProductTranslation]
+  isDeleted: Boolean
+  build_status: PRODUCT_BUILD_STATUS
+  release_status: PRODUCT_RELEASE_STATUS
+  status: STATUS
+  calories: Int
+  serialDisplayNumber: Int
+  inReview: Boolean
+  discount: Discount
+  approvedBy: String
+  notes: [String]
+  mealsTime: [MealsTime]
+  totalSalePrice: Float
+  createdAt: String
+  updatedAt: String
+  productGroupsOrders: [ProductGroupsOrders]
+  remainingQuantity: Int
+  quantity: Int
+}
+
+input CreateProductDto {
+  nameArabic: String
+  nameEnglish: String
+  descriptionArabic: String
+  descriptionEnglish: String
+  preparationTime: Int
+  productGroupsIds: [String]
+  categoriesIds: [String]
+  branchesIds: [String]
+  images: [ProductImageDto]
+  mainImage: ProductImageDto
+  price: Int
+  status: STATUS
+  calories: Int
+  mealsTime: [PRODUCT_MEALS_TIME]
+  productGroupsOrders: [ProductGroupsOrdersInput]
+  quantity: Int
+}
+
+input ProductImageDto {
+  url: String!
+  titleArabic: String
+  titleEnglish: String
+  descriptionArabic: String
+  descriptionEnglish: String
+  new: Boolean
+}
+
+input UpdateProductDto {
+  nameArabic: String
+  nameEnglish: String
+  descriptionArabic: String
+  descriptionEnglish: String
+  preparationTime: Int
+  productGroupsIds: [String]
+  categoriesIds: [String]
+  branchesIds: [String]
+  images: [ProductImageDto]
+  mainImage: ProductImageDto
+  price: Int
+  status: STATUS
+  calories: Int
+  mealsTime: [PRODUCT_MEALS_TIME]
+  serialDisplayNumber: Int
+  productGroupsOrders: [ProductGroupsOrdersInput]
+  quantity: Int
+  tags: [String]
+}
+
+type ProductForFindAll {
+  _id: String
+  name: String
+  description: String
+  preparationTime: Int
+  productGroups: [ProductGroup]
+  productCategories: [ProductCategoryRes]
+  merchantId: String
+  branchesIds: [String]
+  images: [ProductImage]
+  mainImage: ProductImage
+  price: Int
+  numberOfSale: Int
+  translation: [ProductTranslation]
+  isDeleted: Boolean
+  build_status: PRODUCT_BUILD_STATUS
+  release_status: PRODUCT_RELEASE_STATUS
+  status: STATUS
+  calories: Int
+  serialDisplayNumber: Int
+  inReview: Boolean
+  discount: String
+  approvedBy: String
+  notes: [String]
+  mealsTime: [MealsTime]
+  totalSalePrice: Float
+  createdAt: String
+  updatedAt: String
+  productGroupsOrders: [ProductGroupsOrders]
+  remainingQuantity: Int
+  quantity: Int
+  branches: [Branch]
+}
+
+type FindAllProductsRes {
+  products: [ProductForFindAll]
+  page: Int
+  pages: Int
+  length: Int
+}
+
+input GetAllProductDto {
+  page: Int
+  limit: Int
+  sortBy: String
+  paginate: Boolean
+  order: Int
+  search: String
+  categories: [String]
+  branches: [String]
+  build_status: PRODUCT_BUILD_STATUS
+  status: STATUS
+  release_status: PRODUCT_RELEASE_STATUS
+}
+
+input UpdateSerialInput {
+  id: String
+  newSerialNumber: Int
+}
+
+input ReorderSerialNumberDto {
+  serials: [UpdateSerialInput]
+}
+
+type Query {
+  findOneProduct(merchantId: String!, productId: String!): FindOneProductRes
+  findAllProducts(merchantId: String, getAllProductsDto: GetAllProductDto): FindAllProductsRes
+}
+
+type Mutation {
+  createProduct(createDto: CreateProductDto!, merchantId: String!): FindOneProductRes
+  updateOneProduct(merchantId: String!, productId: String!, updateProductDto: UpdateProductDto): FindOneProductRes
+  removeProduct(merchantId: String!, productId: String!): FindOneProductRes
+  serialsReorderProduct(reorderSerialNumber: ReorderSerialNumberDto): [Product]
+  serialsReorderProductGroupsOrders(
+    productId: String!
+    reorderSerialNumber: ReorderSerialNumberDto
+  ): [ProductGroupsOrders]
+}

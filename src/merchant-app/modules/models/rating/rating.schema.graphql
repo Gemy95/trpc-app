@@ -1,0 +1,133 @@
+type Rating {
+  _id: String
+  rating: RatingScale
+  extraNote: String
+  branch: Branch
+  order: Order
+  client: Client
+  merchant: Merchant
+  comment: String
+  is_public: Boolean
+  createdAt: String
+  updatedAt: String
+}
+
+input CreateRatingDto {
+  ignore: Boolean
+  rating: String
+  extraNote: String
+  comment: String
+}
+
+type MarketplaceOrderRatingRes {
+  success: Boolean
+}
+
+type OrdersRatingsLatestOrderRes {
+  _id: String
+  merchant: Merchant
+  branch: Branch
+}
+
+type MarketplaceOrdersRatingsLatestOrderStatusRes {
+  success: Boolean
+  rated: Boolean
+  data: OrdersRatingsLatestOrderRes
+}
+
+type LevelRes {
+  one: Int
+  two: Int
+  three: Int
+  four: Int
+  five: Int
+}
+
+type MarketplaceRatingRes {
+  success: Boolean
+  totalRates: Int
+  avgOrdersRating: Int
+  levels: [LevelRes]
+  data: [Rating]
+}
+
+type MarketplaceOrdersRatingInfoRes {
+  success: Boolean
+  ratings: [Rating]
+  levelOneCount: Int
+  levelTwoCount: Int
+  levelThreeCount: Int
+  levelFourCount: Int
+  levelFiveCount: Int
+  totalRatings: Int
+  page: Int
+  pages: Int
+  length: Int
+}
+
+type RatingsCustom2Res {
+  _id: String
+  rating: RatingScale
+  extraNote: String
+  order: Order
+  client: Client
+  comment: String
+  is_public: Boolean
+  merchant: Merchant
+  city: City # new data added instead of user Rating type
+  createdAt: String
+  updatedAt: String
+}
+
+type RatingsCustom1Res {
+  _id: String
+  ratings: [RatingsCustom2Res]
+  avgOrdersRating: Float
+}
+
+type DashboardRatingRes {
+  success: Boolean
+  ratings: RatingsCustom1Res
+  levelOneCount: Int
+  levelTwoCount: Int
+  levelThreeCount: Int
+  levelFourCount: Int
+  levelFiveCount: Int
+  totalRatings: Int
+  page: Int
+  pages: Int
+  length: Int
+}
+
+input DashboardRatingQuery {
+  page: Int
+  limit: Int
+  sortBy: String
+  paginate: Boolean
+  order: Int
+  branches: [String]
+  fromCreatedAt: String
+  toCreatedAt: String
+  levels: [String]
+  orderRefId: String
+}
+
+type DashboardHideCommentRes {
+  success: Boolean
+}
+
+input HideCommentRatingDto {
+  is_public: Boolean
+}
+
+type Mutation {
+  marketplaceOrderRating(order: String!, createRatingDto: CreateRatingDto): MarketplaceOrderRatingRes
+  dashboardHideComment(merchant: String!, rate: String!, body: HideCommentRatingDto): DashboardHideCommentRes
+}
+
+type Query {
+  marketplaceOrdersRatingsLatestOrderStatus: MarketplaceOrdersRatingsLatestOrderStatusRes
+  marketplaceRating(merchant: String!): MarketplaceRatingRes
+  marketplaceOrdersRatingInfo(branch: String!): MarketplaceOrdersRatingInfoRes
+  dashboardRating(merchant: String!, query: DashboardRatingQuery): DashboardRatingRes
+}

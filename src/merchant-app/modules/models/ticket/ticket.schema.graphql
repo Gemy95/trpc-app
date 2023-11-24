@@ -1,0 +1,114 @@
+enum TicketPriority {
+  low
+  moderate
+  high
+  risk
+}
+
+enum TicketStatus {
+  pending
+  inprogress
+  resolved
+  reopened
+}
+
+enum TicketScope {
+  merchant
+  operation
+}
+
+type Ticket {
+  tag: String
+  reason: String
+  description: String
+  clientNotes: [String]
+  internalNotes: [String]
+  status: TicketStatus
+  createdBy: String
+  resolvedBy: String
+  priority: TicketPriority
+  scope: TicketScope
+  merchant: String
+}
+
+type TicketRes {
+  tag: TicketTag
+  reason: TagReason
+  description: String
+  clientNotes: [String]
+  internalNotes: [String]
+  status: TicketStatus
+  createdBy: User
+  resolvedBy: User
+  priority: TicketPriority
+  scope: TicketScope
+  merchant: Merchant
+}
+
+type TicketFindAllRes {
+  tag: TicketTag
+  reason: TagReason
+  description: String
+  clientNotes: [String]
+  internalNotes: [String]
+  status: TicketStatus
+  createdBy: String
+  resolvedBy: String
+  priority: TicketPriority
+  scope: TicketScope
+  merchant: String
+}
+
+input CreateTicketDto {
+  tag: String!
+  reason: String!
+  description: String
+  clientNotes: String
+  scope: TicketScope
+}
+
+input GetAllForOperation {
+  page: Int
+  limit: Int
+  sortBy: String
+  paginate: Boolean
+  order: Int
+  scope: TicketScope
+  merchant: String
+}
+
+input UpdateTicketDto {
+  tag: String
+  reason: String
+  description: String
+  clientNotes: String
+  scope: TicketScope
+  internalNotes: String
+  status: String
+}
+
+type FindAllTicketsForMerchantRes {
+  tickets: [TicketFindAllRes]
+  page: Int
+  pages: Int
+  length: Int
+}
+
+type FindAllTicketsForOperationRes {
+  tickets: [TicketFindAllRes]
+  page: Int
+  pages: Int
+  length: Int
+}
+
+type Mutation {
+  createTicket(createTicketDto: CreateTicketDto): Ticket
+  updateOneTicket(id: String!, updateTicketDto: UpdateTicketDto): Ticket
+  removeOneTicket(id: String!): Ticket
+}
+
+type Query {
+  findAllTicketsForMerchant(merchant: String!, params: GetAllDtoInput): FindAllTicketsForMerchantRes
+  findAllTicketsForOperation(params: GetAllDtoInput): FindAllTicketsForOperationRes
+  findOneTicket(id: String!): Ticket
+}

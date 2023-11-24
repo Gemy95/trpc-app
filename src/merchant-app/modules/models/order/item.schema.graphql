@@ -1,0 +1,24 @@
+type OptionTranslation {
+  _lang: String
+  name: String
+  _id: String
+}
+
+type Option {
+  _id: String
+  name: String
+  extraPrice: Float
+  translation: [OptionTranslation]
+  serialDisplayNumber: Int
+}
+
+type Groups {
+  productGroupId: String
+  options: [Option]
+}
+
+type Item {
+  count: Int
+  productId: String
+  groups: [Groups]
+}

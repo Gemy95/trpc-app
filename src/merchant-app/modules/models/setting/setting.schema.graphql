@@ -1,0 +1,181 @@
+enum SettingModelName {
+  verification
+  Branch
+}
+
+enum OTP_VERIFICATION_TYPE {
+  email
+  mobile
+}
+
+enum SETTING_MODEL_NAME {
+  verification
+  Branch
+  BranchGroup
+  Order
+  MarketplaceMerchantBranches
+  ShoppexOrderTax
+  LowestMarketplaceOrderPrice
+  MerchantLowestPriceToOrder
+}
+
+input CreateDistanceDto {
+  minDistance: Float
+  maxDistance: Float
+  # modelName: String
+}
+
+type Setting {
+  _id: String
+  otp_verify_type: OTP_VERIFICATION_TYPE
+  minDistance: Float
+  maxDistance: Float
+  modelName: SettingModelName
+}
+
+type VerificationTypeSettingRes {
+  otp_verify_type: OTP_VERIFICATION_TYPE
+  modelName: String
+}
+
+type DeleteOneSettingRes {
+  message: String
+}
+
+input CreateBranchDistanceSettingDto {
+  minDistance: Float
+  maxDistance: Float
+  # modelName: SETTING_MODEL_NAME
+}
+
+type BranchDistanceSettingRes {
+  minDistance: Float
+  maxDistance: Float
+  modelName: SETTING_MODEL_NAME
+}
+
+input CreateBranchGroupDistanceSettingDto {
+  minDistance: Float
+  maxDistance: Float
+  # modelName: SETTING_MODEL_NAME
+}
+
+type BranchGroupDistanceSettingRes {
+  minDistance: Float
+  maxDistance: Float
+  modelName: SETTING_MODEL_NAME
+}
+
+input CreateMarketplaceMerchantBranchesDistanceSettingDto {
+  minDistance: Float
+  maxDistance: Float
+  # modelName: SETTING_MODEL_NAME
+}
+
+type MarketplaceMerchantBranchesDistanceSettingRes {
+  minDistance: Float
+  maxDistance: Float
+  modelName: SETTING_MODEL_NAME
+}
+
+input CreateMarketplaceLowestOrderPriceSettingDto {
+  # modelName: SETTING_MODEL_NAME
+  amount: Float
+  type: AMOUNT_TYPE
+}
+
+type MarketplaceLowestOrderPriceSettingRes {
+  modelName: SETTING_MODEL_NAME
+  amount: Float
+  type: AMOUNT_TYPE
+}
+
+input CreateMarketplaceLowestOrderPriceSettingDto {
+  # modelName: SETTING_MODEL_NAME
+  amount: Float
+  type: AMOUNT_TYPE
+}
+
+type MarketplaceLowestOrderPriceSettingRes {
+  modelName: SETTING_MODEL_NAME
+  amount: Float
+  type: AMOUNT_TYPE
+}
+
+input CreateMerchantLowestOrderPriceSettingDto {
+  # modelName: SETTING_MODEL_NAME
+  amount: Float
+  type: AMOUNT_TYPE
+}
+
+type MerchantLowestOrderPriceSettingRes {
+  modelName: SETTING_MODEL_NAME
+  amount: Float
+  type: AMOUNT_TYPE
+}
+
+input CreateShoppexOrderTaxSettingDto {
+  # modelName: SETTING_MODEL_NAME
+  amount: Float
+  type: AMOUNT_TYPE
+}
+
+type ShoppexOrderTaxSettingRes {
+  modelName: SETTING_MODEL_NAME
+  amount: Float
+  type: AMOUNT_TYPE
+}
+
+input CreateTimeAfterDeliveredOrderSettingDto {
+  # modelName: SETTING_MODEL_NAME
+  TimeAfterDeliveredOrder: Float
+}
+
+type TimeAfterDeliveredOrderSettingRes {
+  modelName: SETTING_MODEL_NAME
+  TimeAfterDeliveredOrder: Float
+}
+
+input CreateVerificationTypeSettingDto {
+  otp_verify_type: OTP_VERIFICATION_TYPE
+  # modelName: SETTING_MODEL_NAME
+}
+
+type Mutation {
+  createBranchDistanceSetting(createBranchDistanceSettingDto: CreateBranchDistanceSettingDto): BranchDistanceSettingRes
+  createBranchGroupDistanceSetting(
+    createBranchGroupDistanceSettingDto: CreateBranchGroupDistanceSettingDto
+  ): BranchGroupDistanceSettingRes
+  createMarketplaceMerchantBranchesDistanceSetting(
+    createMarketplaceMerchantBranchesDistanceSettingDto: CreateMarketplaceMerchantBranchesDistanceSettingDto
+  ): MarketplaceMerchantBranchesDistanceSettingRes
+  createMarketplaceLowestOrderPriceSetting(
+    createMarketplaceLowestOrderPriceSettingDto: CreateMarketplaceLowestOrderPriceSettingDto
+  ): MarketplaceLowestOrderPriceSettingRes
+  createShoppexOrderTaxSetting(
+    createShoppexOrderTaxSettingDto: CreateShoppexOrderTaxSettingDto
+  ): ShoppexOrderTaxSettingRes
+  createTimeAfterDeliveredOrderSetting(
+    createTimeAfterDeliveredOrderSettingDto: CreateTimeAfterDeliveredOrderSettingDto
+  ): TimeAfterDeliveredOrderSettingRes
+  createMerchantLowestOrderPriceSetting(
+    createMerchantLowestOrderPriceSettingDto: CreateMerchantLowestOrderPriceSettingDto
+  ): MerchantLowestOrderPriceSettingRes
+  createVerificationTypeSetting(
+    createVerificationTypeSettingDto: CreateVerificationTypeSettingDto
+  ): VerificationTypeSettingRes
+  updateOneSetting(updateDistanceDto: CreateDistanceDto): Setting
+  deleteOneSetting(id: String!): DeleteOneSettingRes
+}
+
+type Query {
+  marketplaceDistanceGetOneByModelName(modelName: String!): Setting
+  findOneBranchDistanceSetting: BranchDistanceSettingRes
+  findOneBranchGroupDistanceSetting: BranchGroupDistanceSettingRes
+  findOneMarketplaceMerchantBranchesDistanceSetting: MarketplaceMerchantBranchesDistanceSettingRes
+  findOneMarketplaceLowestOrderPriceSetting: MarketplaceLowestOrderPriceSettingRes
+  findOneShoppexOrderTaxSetting: ShoppexOrderTaxSettingRes
+  findOneTimeAfterDeliveredOrderSetting: TimeAfterDeliveredOrderSettingRes
+  findOneMerchantLowestOrderPriceSetting: MerchantLowestOrderPriceSettingRes
+  findOneVerificationTypeSetting: VerificationTypeSettingRes
+}
